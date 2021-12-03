@@ -30,6 +30,17 @@ async function main() {
   );
 
   console.log("Token deployed to:", token.address);
+
+  const Fake = await ethers.getContractFactory("FakeProofOfHumanity");
+  console.log("Deploying Fake Proof Of Humanity...");
+
+  const fake = await upgrades.deployProxy(
+    Fake,
+    [],
+    {}
+  );
+  
+  console.log("Fake PoH deployed to:", fake.address);
 }
 
 main()
