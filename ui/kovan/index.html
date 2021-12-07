@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Register information at Blockchain</title>
+ 
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+ 
+  <body class="container"> 
+
+    <h1 class="page-header">UBI v2 - Proof Of Integrity - Kovan Network</h1>
+    <button id="loginButton" class="btn btn-primary">Connect</button><br/>
+    <span id="userWallet"></span>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Get Balance of <div id="address"></div></h3>
+        <div class="form-group">
+          <label for="balance">Balance:</label>
+          <div id="balance"></div>
+        </div>
+        <a href="#" onclick="getBalance()" class="btn btn-primary">Get Balance</a>
+      </div>
+    </div>
+
+    <!--<div class="row">
+      <div>
+        <h3 class="sub-header">Start Accruing UBI</h3>
+        <a href="#" onclick="accruing()" class="btn btn-primary">Start Accruing UBI (Account 2)</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Create Stream</h3>
+        <a href="#" onclick="createStream()" class="btn btn-primary">Stream From Account 2 To Account 3</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Get Balance From Stream</h3>
+        <a href="#" onclick="getBalanceFromStream()" class="btn btn-primary">Get Balance Account 3</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Withdraw From Stream</h3>
+        <input type="text" id="amount" placeholder="Amount"/><span>&nbsp;UBI</span><br/><br/>
+        <a href="#" onclick="withdrawFromStream()" class="btn btn-primary">Withdraw (Account 3)</a>
+      </div>
+    </div>-->
+
+  </body>
+</html>
