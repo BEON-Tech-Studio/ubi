@@ -28,31 +28,42 @@
       <div>
         <h3 class="sub-header">Start Accruing UBI</h3>
         <a href="#" onclick="accruing()" class="btn btn-primary">Start Accruing UBI</a><br/><br/>
-        <span id="accruing-result"></span>
       </div>
     </div>
 
-    <!--<div class="row">
+    <div class="row">
       <div>
         <h3 class="sub-header">Create Stream</h3>
-        <a href="#" onclick="createStream()" class="btn btn-primary">Stream From Account 2 To Account 3</a>
+        <input type="text" id="address-stream"/><span>&nbsp;Address</span><br/><br/>
+        <input type="text" id="quantity-stream" value="20000000000000"/><span>&nbsp;Quantity</span><br/><br/>
+        <a href="#" onclick="createStream()" class="btn btn-primary">Stream UBI</a>
       </div>
     </div>
 
     <div class="row">
       <div>
         <h3 class="sub-header">Get Balance From Stream</h3>
-        <a href="#" onclick="getBalanceFromStream()" class="btn btn-primary">Get Balance Account 3</a>
+        <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+        <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
+        <a href="#" onclick="getBalanceFromStream()" class="btn btn-primary">Get Balance</a>
       </div>
     </div>
 
     <div class="row">
       <div>
         <h3 class="sub-header">Withdraw From Stream</h3>
-        <input type="text" id="amount" placeholder="Amount"/><span>&nbsp;UBI</span><br/><br/>
-        <a href="#" onclick="withdrawFromStream()" class="btn btn-primary">Withdraw (Account 3)</a>
+        <input type="text" id="withdraw-stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+        <input type="text" id="withdraw-amount" placeholder="Amount"/><span>&nbsp;UBI</span><br/><br/>
+        <a href="#" onclick="withdrawFromStream()" class="btn btn-primary">Withdraw</a>
       </div>
-    </div>-->
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Result:</h3>
+        <span id="accruing-result"></span>
+      </div>
+    </div>
 
   </body>
 </html>
