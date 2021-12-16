@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Proof Of Integrity</title>
+ 
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+    <script src="./poi.js"></script>    
+  </head>
+ 
+  <body class="container"> 
+
+    <h1 class="page-header">Proof Of Integrity Pool</h1>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">UBI Address</h3>
+        <a href="#" onclick="getUBIAddress()" class="btn btn-primary">Get UBI Address</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Max UBI Per Recipient</h3>
+        <a href="#" onclick="getmaxUBIPerRecipient()" class="btn btn-primary">Get Value</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Add Recipient</h3>
+        <input type="text" id="add-address" placeholder="Address"/><br/><br/>
+        <a href="#" onclick="addRecipient()" class="btn btn-primary">Add Recipient</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Remove Recipient</h3>
+        <input type="text" id="remove-address" placeholder="Address"/><br/><br/>
+        <a href="#" onclick="removeRecipient()" class="btn btn-primary">Remove Recipient</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Is Recipient</h3>
+        <input type="text" id="is-recipient-address" placeholder="Address"/><br/><br/>
+        <a href="#" onclick="isRecipient()" class="btn btn-primary">Is Recipient?</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Transfer UBI To Pool</h3>
+        <input type="text" id="amount" placeholder="Amount"/><br/><br/>
+        <a href="#" onclick="transferUBIToPool()" class="btn btn-primary">Transfer</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Pool Balance</h3>
+        <a href="#" onclick="getPoolBalance()" class="btn btn-primary">Get Balance</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Distribute UBI</h3>
+        <input type="text" id="distribute-address-1" placeholder="Address"/><br/><br/>
+        <input type="text" id="distribute-address-2" placeholder="Address"/><br/><br/>
+        <input type="text" id="distribute-address-3" placeholder="Address"/><br/><br/>
+        <a href="#" onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Result:</h3>
+        <span id="result"></span>
+      </div>
+    </div>
+
+  </body>
+</html>
