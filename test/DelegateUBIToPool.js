@@ -35,15 +35,6 @@ contract('DelegateUBIToPool.sol', accounts => {
                     submissionTime: info.submissionTime
                 });
         }
-        mockUBI = await waffle.deployMockContract(accounts[0], require("../artifacts/contracts/UBI.sol/UBI.json").abi);
-        stubDelegatedAccruedValue = (address, amount) =>
-            mockUBI.mock.getDelegatedAccruedValue
-                .withArgs(address)
-                .returns(amount);
-
-        stubCreateStream = (streamId) =>
-            mockUBI.mock.createStream
-                .returns(streamId);
 
         addresses = _addresses;
 
@@ -74,7 +65,7 @@ contract('DelegateUBIToPool.sol', accounts => {
         setSubmissionIsRegistered(ethers.constants.AddressZero, false);
 
         const deletageUBIFactory = await ethers.getContractFactory("DelegateUBIToPool");
-        deletageUBI = await upgrades.deployProxy(deletageUBIFactory, [mockProofOfHumanity.address, mockUBI.address, accruedPerSecond.toString()]);
+        deletageUBI = await upgrades.deployProxy(deletageUBIFactory, [mockProofOfHumanity.address, ubi.address]);
         await deletageUBI.deployed();
     });
 
@@ -93,12 +84,10 @@ contract('DelegateUBIToPool.sol', accounts => {
             const percentage = 50;
 
             await setSubmissionIsRegistered(addresses[0], true);
-            await stubDelegatedAccruedValue(recipient, 1000000);
-            await stubCreateStream(1);
 
             const tx = await deletageUBI.delegateToPool(recipient, percentage)
-            const { events: [{ event }] } = await tx.wait();
-            expect(event).to.eq('IncomeDelegated') // TODO: add custom matcher
+            const { events } = await tx.wait();
+            expect(events.find(({ event }) => event == 'IncomeDelegated')).not.to.be.empty;
         });
 
         it("require fail - Percentage is zero", async () => {
