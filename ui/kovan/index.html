@@ -70,6 +70,15 @@
 
       <div class="row">
         <div>
+          <h3 class="sub-header">Cancel Stream</h3>
+          <input type="text" id="stream-id-cancel"/><span>&nbsp;Stream ID</span><br/><br/>
+          <a onclick="cancelStream()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="cancel-stream-result"></span><a href="#" id="cancel-stream-result-link" target="_blank"></a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
           <h3 class="sub-header">Get Balance By Stream ID</h3>
           <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
           <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>

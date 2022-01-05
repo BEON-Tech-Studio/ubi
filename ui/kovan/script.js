@@ -90,6 +90,19 @@ async function createStream() {
   sendTransaction(transaction, 'stream-result');
 }
 
+async function cancelStream() {
+  var streamId = document.getElementById('stream-id-cancel').value;
+
+  const transaction = {
+    from: account, 
+    to: contractAddress, 
+    data: contract.methods.cancelStream(streamId).encodeABI(),
+    gas: web3.utils.toHex(21000 * 200)
+  };
+
+  sendTransaction(transaction, 'cancel-stream-result');
+}
+
 function getBalanceByStream() {
   var streamId = document.getElementById('stream-id').value;
   var address = document.getElementById('address-stream-balance').value;
