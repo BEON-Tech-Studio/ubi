@@ -21,7 +21,8 @@ async function main() {
       deploymentParams.TOKEN_NAME,
       deploymentParams.TOKEN_SYMBOL,
       deploymentParams.ACCRUED_PER_SECOND,
-      deploymentParams.PROOF_OF_HUMANITY_KOVAN
+      /*deploymentParams.PROOF_OF_HUMANITY_KOVAN*/
+      "0x73bcce92806bce146102c44c4d9c3b9b9d745794"
     ],
     {
       initializer: 'initialize',
@@ -31,7 +32,7 @@ async function main() {
 
   console.log("Token deployed to:", token.address);
 
-  const Fake = await ethers.getContractFactory("FakeProofOfHumanity");
+  /*const Fake = await ethers.getContractFactory("FakeProofOfHumanity");
   console.log("Deploying Fake Proof Of Humanity...");
 
   const fake = await upgrades.deployProxy(
@@ -40,7 +41,7 @@ async function main() {
     {}
   );
   
-  console.log("Fake PoH deployed to:", fake.address);
+  console.log("Fake PoH deployed to:", fake.address);*/
 }
 
 main()

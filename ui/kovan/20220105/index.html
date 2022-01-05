@@ -23,6 +23,7 @@
     <div class="container">
 
       <h1 class="page-header">UBI v2 - Kovan</h1>
+      <h3>Contract Address: <span id="contract-addres"></span></h3>
 
       <div class="row">
         <button id="loginButton" class="btn btn-primary">Connect</button><br/>
@@ -62,7 +63,13 @@
           <input type="text" id="address-stream"/><span>&nbsp;Destination Address</span><br/><br/>
           <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
           <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
+          <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
+          <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
+          <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
           <input type="text" id="quantity-stream"/><span>&nbsp;Quantity (add all decimals)</span><br/><br/>
+          <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
+          <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
+          <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
           <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
           <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
         </div>
@@ -94,7 +101,6 @@
         <div>
           <h3 class="sub-header">Withdraw From Stream</h3>
           <input type="text" id="withdraw-stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
-          <input type="text" id="withdraw-amount" placeholder="Amount"/><span>&nbsp;UBI</span><br/><br/>
           <a onclick="withdrawFromStream()" class="btn btn-primary">Go!</a><br/><br/>
           <span id="withdraw-result"></span><a href="#" id="withdraw-result-link" target="_blank"></a>
         </div>
