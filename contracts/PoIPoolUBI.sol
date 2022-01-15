@@ -24,7 +24,7 @@ interface IUBI {
     );
 }
 
-contract PoIPool is Initializable {
+contract PoIPoolUBI is Initializable {
 
   using SafeMath for uint256;
 
