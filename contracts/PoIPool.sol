@@ -17,6 +17,11 @@ interface IUBI {
     returns (
       bool transferred
     );
+  function withdrawFromStream(uint256 streamId)
+    external
+    returns (
+      bool withdrawn
+    );
 }
 
 contract PoIPool is Initializable {
@@ -25,6 +30,7 @@ contract PoIPool is Initializable {
 
   /* Events */
 
+  event UBIClaimed(uint256 totalStreams);
   event UBIDistributed(uint256 totalHumans, uint256 totalUBI);
 
   /* Storage */
@@ -46,19 +52,18 @@ contract PoIPool is Initializable {
     governor = msg.sender;
   }
 
-  function claimUBIFromStreams(uint256[] streamIds) public onlyByGovernor returns (bool) {
-    // TODO
-    return true;
-    
-    /*for(uint i = 0; i < _humans.length; i++) {
-      address currentHuman = _humans[i];
-      if(isRecipient(currentHuman)) {
-        if(ubi.transfer(currentHuman, valueToDistribute)) {
-          totalHumans++;
-          totalTransferred = totalTransferred.add(valueToDistribute);
-        }
+  function claimUBIFromStreams(uint256[] calldata _streamIds) external onlyByGovernor returns (bool) {
+    uint256 totalStreams = 0;
+    for(uint i = 0; i < _streamIds.length; i++) {
+      uint256 currentStream = _streamIds[i];
+      if(ubi.withdrawFromStream(currentStream)) {
+        totalStreams++;
       }
-    }*/
+    }
+
+    emit UBIClaimed(totalStreams);
+
+    return true;
   }
 
   function changeMaxUBIPerRecipient(uint256 _maxUBIPerRecipient) external onlyByGovernor {
@@ -69,11 +74,11 @@ contract PoIPool is Initializable {
     ubi = _ubi;
   }
 
-  function distributeUBIToRecipients(address[] memory _humans, uint256 totalRecipients) public onlyByGovernor returns (bool) {
+  function distributeUBIToRecipients(address[] calldata _humans, uint256 _totalRecipients) external onlyByGovernor returns (bool) {
     require(address(ubi) != address(0x00), "UBI contract has not been assigned");
-    require(totalRecipients > 0, "Total recipients must be greater than zero");
+    require(_totalRecipients > 0, "Total recipients must be greater than zero");
     require(_humans.length <= 0, "Number of humans must be greater than total recipients");
-    uint256 valueToDistribute = ubi.balanceOf(address(this)).div(totalRecipients);
+    uint256 valueToDistribute = ubi.balanceOf(address(this)).div(_totalRecipients);
     if(valueToDistribute > maxUBIPerRecipient) {
       valueToDistribute = maxUBIPerRecipient;
     }
@@ -83,11 +88,9 @@ contract PoIPool is Initializable {
     uint256 totalTransferred = 0;
     for(uint i = 0; i < _humans.length; i++) {
       address currentHuman = _humans[i];
-      if(isRecipient(currentHuman)) {
-        if(ubi.transfer(currentHuman, valueToDistribute)) {
-          totalHumans++;
-          totalTransferred = totalTransferred.add(valueToDistribute);
-        }
+      if(ubi.transfer(currentHuman, valueToDistribute)) {
+        totalHumans++;
+        totalTransferred = totalTransferred.add(valueToDistribute);
       }
     }
 
