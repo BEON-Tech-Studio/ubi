@@ -30,6 +30,11 @@
       </div>
 
       <div class="row">
+        <h3 class="sub-header">Upgrade UBI</h3>
+        <a onclick="upgradeUBI()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
         <h3 class="sub-header">Get UBI Balance</h3>
         <div class="form-group">
           <input type="text" id="address-balance"/><span>&nbsp;Address</span><br/><br/>
@@ -60,7 +65,8 @@
       <div class="row">
         <div>
           <h3 class="sub-header">Create Stream</h3>
-          <input type="text" id="address-stream"/><span>&nbsp;Destination Address</span><br/><br/>
+          <input type="text" id="address-stream-sender"/><span>&nbsp;Sender Address</span><br/><br/>
+          <input type="text" id="address-stream-recipient" disabled/><span>&nbsp;Destination Address</span><br/><br/>
           <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
           <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
           <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
@@ -71,46 +77,44 @@
           <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
           <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
           <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
+          <span id="stream-result"></span>
         </div>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Get Balance By Stream ID</h3>
+        <h3 class="sub-header">Get Balance By Stream ID</h3>
+        <div class="form-group">
           <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
           <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
-          <div class="form-group">
-            <label for="balance-stream">Balance:</label>
-            <div id="balance-stream"></div>
-          </div>
-          <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
+          <label for="balance-stream">Balance:</label>
+          <div id="balance-stream"></div>
         </div>
+        <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
       </div>
 
       <div class="row">
         <div>
           <h3 class="sub-header">Set Max UBI Per Recipient</h3>
           <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
-          <a onclick="setMaxUBI()" class="btn btn-primary">Go!</a><br/><br/>
+          <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="set-max-ubi-result"></span>
         </div>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Get Max UBI Per Recipient</h3>
-        <div class="form-group">
-          <label for="max-ubi-result">Max UBI:</label>
-          <div id="max-ubi-result"></div>
-        </div>
-        <a onclick="getPoolBalance()" class="btn btn-primary">Go!</a>
       </div>
 
       <div class="row">
         <div>
-          <h3 class="sub-header">Withdraw From Streams</h3>
-          <input type="text" id="withdraw-stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
-          <a onclick="withdrawFromStream()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="withdraw-result"></span><a href="#" id="withdraw-result-link" target="_blank"></a>
+          <h3 class="sub-header">Get Max UBI Per Recipient</h3>
+          <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="max-ubi-result"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <h3 class="sub-header">Claim UBI From Streams</h3>
+          <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
+          <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="claim-stream-id-result"></span>
         </div>
       </div>
 
