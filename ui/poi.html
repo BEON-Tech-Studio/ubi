@@ -46,11 +46,16 @@
 
       <div class="row">
         <h3 class="sub-header">Get Pool Balance</h3>
-        <div class="form-group">
-          <label for="balance-pool">Balance:</label>
-          <div id="balance-pool"></div>
-        </div>
+        <label for="balance-pool">Balance:</label>
+        <div id="balance-pool"></div>
         <a onclick="getPoolBalance()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Transfer UBI to Pool</h3>
+        <input type="text" id="quantity-ubi"/><span>&nbsp;Quantity</span><br/><br/>
+        <a onclick="transferUBI()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="transfer-result"></span>
       </div>
 
       <div class="row">
@@ -115,6 +120,18 @@
           <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
           <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
           <span id="claim-stream-id-result"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <h3 class="sub-header">Distribute UBI</h3>
+          <div id="distribute-addresses">
+            <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
+          </div>
+          <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
+          <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
+          <span id="distribute-addresses-result"></span>
         </div>
       </div>
 
