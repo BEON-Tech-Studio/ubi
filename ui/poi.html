@@ -36,11 +36,9 @@
 
       <div class="row">
         <h3 class="sub-header">Get UBI Balance</h3>
-        <div class="form-group">
-          <input type="text" id="address-balance"/><span>&nbsp;Address</span><br/><br/>
-          <label for="balance">Balance:</label>
-          <div id="balance"></div>
-        </div>
+        <input type="text" id="address-balance"/><span>&nbsp;Address</span><br/><br/>
+        <label for="balance">Balance:</label>
+        <div id="balance"></div>
         <a onclick="getBalance()" class="btn btn-primary">Go!</a>
       </div>
 
@@ -59,80 +57,66 @@
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Start Accruing UBI From Address</h3>
-          <input type="text" id="address-accruing"/><span>&nbsp;Address</span><br/><br/>
-          <a onclick="startAccruing()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="accruing-result"></span>
-        </div>
+        <h3 class="sub-header">Start Accruing UBI From Address</h3>
+        <input type="text" id="address-accruing"/><span>&nbsp;Address</span><br/><br/>
+        <a onclick="startAccruing()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="accruing-result"></span>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Create Stream</h3>
-          <input type="text" id="address-stream-sender"/><span>&nbsp;Sender Address</span><br/><br/>
-          <input type="text" id="address-stream-recipient" disabled/><span>&nbsp;Destination Address</span><br/><br/>
-          <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
-          <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
-          <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
-          <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
-          <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
-          <input type="text" id="quantity-stream"/><span>&nbsp;Quantity (add all decimals)</span><br/><br/>
-          <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
-          <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
-          <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
-          <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="stream-result"></span>
-        </div>
+        <h3 class="sub-header">Create Stream</h3>
+        <input type="text" id="address-stream-sender"/><span>&nbsp;Sender Address</span><br/><br/>
+        <input type="text" id="address-stream-recipient" disabled/><span>&nbsp;Destination Address</span><br/><br/>
+        <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
+        <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
+        <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
+        <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
+        <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
+        <input type="text" id="quantity-stream"/><span>&nbsp;Quantity (add all decimals)</span><br/><br/>
+        <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
+        <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
+        <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
+        <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="stream-result"></span>
       </div>
 
       <div class="row">
         <h3 class="sub-header">Get Balance By Stream ID</h3>
-        <div class="form-group">
-          <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
-          <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
-          <label for="balance-stream">Balance:</label>
-          <div id="balance-stream"></div>
-        </div>
+        <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+        <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
+        <label for="balance-stream">Balance:</label>
+        <div id="balance-stream"></div>
         <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Set Max UBI Per Recipient</h3>
-          <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
-          <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="set-max-ubi-result"></span>
-        </div>
+        <h3 class="sub-header">Set Max UBI Per Recipient</h3>
+        <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
+        <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="set-max-ubi-result"></span>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Get Max UBI Per Recipient</h3>
-          <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="max-ubi-result"></span>
-        </div>
+        <h3 class="sub-header">Get Max UBI Per Recipient</h3>
+        <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="max-ubi-result"></span>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Claim UBI From Streams</h3>
-          <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
-          <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
-          <span id="claim-stream-id-result"></span>
-        </div>
+        <h3 class="sub-header">Claim UBI From Streams</h3>
+        <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
+        <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="claim-stream-id-result"></span>
       </div>
 
       <div class="row">
-        <div>
-          <h3 class="sub-header">Distribute UBI</h3>
-          <div id="distribute-addresses">
-            <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
-          </div>
-          <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
-          <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
-          <span id="distribute-addresses-result"></span>
+        <h3 class="sub-header">Distribute UBI</h3>
+        <div id="distribute-addresses">
+          <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
         </div>
+        <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
+        <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
+        <span id="distribute-addresses-result"></span>
       </div>
 
     </div>
