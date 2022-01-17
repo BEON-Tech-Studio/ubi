@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Proof Of Integrity</title>
+ 
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
+    <script src="donate.js"></script>
+    <style type="text/css">
+      .row {
+        border: black 1px solid;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+      }
+      .container {
+        margin-bottom: 50px;
+      }
+    </style>
+  </head>
+ 
+  <body>
+
+    <div class="container">
+
+      <h1 class="page-header">Proof of Integrity Pool - Donate ERC20 Token - Development</h1>
+
+      <div class="row">
+        <span id="userWallet"></span>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Get Pool Balance Ether</h3>
+        <label for="balance-eth-pool">Balance:</label>
+        <div id="balance-eth-pool"></div>
+        <a onclick="getPoolBalanceEther()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Get Balance Ether</h3>
+        <input type="text" id="address-eth-balance"/><span>&nbsp;Address</span><br/><br/>
+        <label for="balance-eth">Balance:</label>
+        <div id="balance-eth"></div>
+        <a onclick="getBalanceEther()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Donate Ether to Pool</h3>
+        <input type="text" id="donate-eth-address"/><span>&nbsp;Address</span><br/><br/>
+        <input type="text" id="donate-eth-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="donateEther()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="transfer-eth-result"></span>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Withdraw Ether from Pool (only owner)</h3>
+        <input type="text" id="withdraw-eth-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="withdrawEther()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="withdraw-eth-result"></span>
+      </div>
+
+    </div>
+
+  </body>
+</html>
