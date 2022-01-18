@@ -29,6 +29,8 @@
         <span id="userWallet"></span>
       </div>
 
+      <h2 class="page-header">Ether</h2>
+
       <div class="row">
         <h3 class="sub-header">Get Pool Balance Ether</h3>
         <label for="balance-eth-pool">Balance:</label>
@@ -49,7 +51,7 @@
         <input type="text" id="donate-eth-address"/><span>&nbsp;Address</span><br/><br/>
         <input type="text" id="donate-eth-amount"/><span>&nbsp;Amount</span><br/><br/>
         <a onclick="donateEther()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="transfer-eth-result"></span>
+        <span id="donate-eth-result"></span>
       </div>
 
       <div class="row">
@@ -57,6 +59,59 @@
         <input type="text" id="withdraw-eth-amount"/><span>&nbsp;Amount</span><br/><br/>
         <a onclick="withdrawEther()" class="btn btn-primary">Go!</a><br/><br/>
         <span id="withdraw-eth-result"></span>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Make a Payment with Ether from Pool (only owner)</h3>
+        <input type="text" id="transfer-eth-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+        <input type="text" id="transfer-eth-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="transferEther()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="transfer-eth-result"></span>
+      </div>
+
+      <h2 class="page-header">ERC20 Tokens</h2>
+
+      <div class="row">
+        <h3 class="sub-header">Get Pool Balance ERC20 Token</h3>
+        <input type="text" onchange="getTokenSymbol('address-erc20-pool-balance')" id="address-erc20-pool-balance"/><span>&nbsp;Token Address&nbsp;</span><span id="address-erc20-pool-balance-symbol"></span><br/><br/>
+        <label for="balance-erc20-pool">Balance:</label>
+        <div id="balance-erc20-pool"></div>
+        <a onclick="getPoolBalanceERC20()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Get Balance ERC20 Token</h3>
+        <input type="text" onchange="getTokenSymbol('address-erc20-token-balance')" id="address-erc20-token-balance"/><span>&nbsp;Token Address&nbsp;</span><span id="address-erc20-token-balance-symbol"></span><br/><br/>
+        <input type="text" id="address-erc20-balance"/><span>&nbsp;Wallet Address</span><br/><br/>
+        <label for="balance-erc20">Balance:</label>
+        <div id="balance-erc20"></div>
+        <a onclick="getBalanceERC20()" class="btn btn-primary">Go!</a>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Donate ERC20 Token to Pool</h3>
+        <input type="text" onchange="getTokenSymbol('donate-erc20-token')" id="donate-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="donate-erc20-token-symbol"></span><br/><br/>
+        <input type="text" id="donate-erc20-address"/><span>&nbsp;Sender Address</span><br/><br/>
+        <input type="text" id="donate-erc20-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="donateERC20()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="donate-erc20-result"></span>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Withdraw ERC20 Token from Pool (only owner)</h3>
+        <input type="text" onchange="getTokenSymbol('withdraw-erc20-token')" id="withdraw-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="withdraw-erc20-token-symbol"></span><br/><br/>
+        <input type="text" id="withdraw-erc20-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="withdrawERC20()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="withdraw-erc20-result"></span>
+      </div>
+
+      <div class="row">
+        <h3 class="sub-header">Make a Payment with ERC20 Token from Pool (only owner)</h3>
+        <input type="text" onchange="getTokenSymbol('transfer-erc20-token')" id="transfer-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="transfer-erc20-token-symbol"></span><br/><br/>
+        <input type="text" id="transfer-erc20-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+        <input type="text" id="transfer-erc20-amount"/><span>&nbsp;Amount</span><br/><br/>
+        <a onclick="transferERC20()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="transfer-erc20-result"></span>
       </div>
 
     </div>
