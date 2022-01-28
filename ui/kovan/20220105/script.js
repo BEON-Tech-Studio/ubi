@@ -158,6 +158,7 @@ async function sendTransaction(transaction, elementId) {
     document.getElementById(elementId + '-link').textContent = 'https://kovan.etherscan.io/tx/' + txHash;
   } catch(error) {
     document.getElementById(elementId).textContent = 'Something went wrong: ' + error.message;
-    document.getElementById(elementId + '-link') = '';
+    document.getElementById(elementId + '-link').href = '';
+    document.getElementById(elementId + '-link').textContent = '';
   }
 }

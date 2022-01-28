@@ -4,106 +4,113 @@
     <title>Proof Of Integrity</title>
  
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
-    <script src="poi.js"></script>    
+    <script src="poi.js"></script>
+    <style type="text/css">
+      .row {
+        border: black 1px solid;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+      }
+      .container {
+        margin-bottom: 50px;
+      }
+    </style>
   </head>
  
-  <body class="container"> 
+  <body>
 
-    <h1 class="page-header">Proof Of Integrity Pool - Kovan Network</h1>
-    <button id="loginButton" class="btn btn-primary">Connect</button><br/>
-    <span id="userWallet"></span>
+    <div class="container">
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Result:</h3>
-        <span id="result"></span>
+      <h1 class="page-header">Proof of Integrity Pool - Kovan</h1>
+      <h3>Contract UBI Address: <span id="contract-address-ubi"></span></h3>
+      <h3>Contract PoI Pool UBI Address: <span id="contract-address-poiubi"></span></h3>
+      <h3>Contract PoI Pool ERC20 Address: <span id="contract-address-poierc20"></span></h3>
+
+      <div class="row">
+        <button id="loginButton" class="btn btn-primary">Connect</button><br/>
+        <span id="userWallet"></span>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">UBI Address</h3>
-        <a href="#" onclick="getUBIAddress()" class="btn btn-primary">Get UBI Address</a>
+      <h2 class="page-header">UBI Contract</h2>
+
+      <div class="row">
+        <h3 class="sub-header">Get Your Balance</h3>
+        <label for="balance-user">Balance:</label>
+        <div id="balance-user"></div>
+        <a onclick="getUserBalance()" class="btn btn-primary">Go!</a>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Max UBI Per Recipient</h3>
-        <a href="#" onclick="getmaxUBIPerRecipient()" class="btn btn-primary">Get Value</a>
+      <div class="row">
+        <h3 class="sub-header">Get Pool Balance</h3>
+        <label for="balance-pool">Balance:</label>
+        <div id="balance-pool"></div>
+        <a onclick="getPoolBalance()" class="btn btn-primary">Go!</a>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Number Of Recipients</h3>
-        <a href="#" onclick="getRecipientsCount()" class="btn btn-primary">Get Number</a>
+      <div class="row">
+        <h3 class="sub-header">Start Accruing UBI</h3>
+        <a onclick="startAccruing()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="accruing-result"></span><a href="#" id="accruing-result-link" target="_blank"></a>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Add Recipient</h3>
-        <input type="text" id="add-address" placeholder="Address"/><br/><br/>
-        <a href="#" onclick="addRecipient()" class="btn btn-primary">Add Recipient</a>
+      <div class="row">
+        <h3 class="sub-header">Create Stream For Pool</h3>
+        <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
+        <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
+        <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
+        <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
+        <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
+        <input type="text" id="amount-stream"/><span>&nbsp;Amount per second (add all decimals)</span><br/><br/>
+        <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
+        <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
+        <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
+        <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Remove Recipient</h3>
-        <input type="text" id="remove-address" placeholder="Address"/><br/><br/>
-        <a href="#" onclick="removeRecipient()" class="btn btn-primary">Remove Recipient</a>
+      <div class="row">
+        <h3 class="sub-header">Get Balance By Stream ID</h3>
+        <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+        <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
+        <label for="balance-stream">Balance:</label>
+        <div id="balance-stream"></div>
+        <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Is Recipient</h3>
-        <input type="text" id="is-recipient-address" placeholder="Address"/><br/><br/>
-        <a href="#" onclick="isRecipient()" class="btn btn-primary">Is Recipient?</a>
+      <!--<h2 class="page-header">PoI Pool UBI Contract</h2>
+
+      <div class="row">
+        <h3 class="sub-header">Set Max UBI Per Recipient</h3>
+        <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
+        <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="set-max-ubi-result"></span>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Transfer UBI To Pool</h3>
-        <input type="text" id="amount" placeholder="Amount"/><br/><br/>
-        <a href="#" onclick="transferUBIToPool()" class="btn btn-primary">Transfer</a>
+      <div class="row">
+        <h3 class="sub-header">Get Max UBI Per Recipient</h3>
+        <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="max-ubi-result"></span>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Pool Balance</h3>
-        <a href="#" onclick="getPoolBalance()" class="btn btn-primary">Get Balance</a>
+      <div class="row">
+        <h3 class="sub-header">Claim UBI From Streams</h3>
+        <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
+        <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
+        <span id="claim-stream-id-result"></span>
       </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Address Balance</h3>
-        <input type="text" id="address-balance" placeholder="Address"/><br/><br/>
-        <a href="#" onclick="getAddressBalance()" class="btn btn-primary">Get Balance</a>
-      </div>
-    </div>
-
-    <div class="row">
-      <div>
+      <div class="row">
         <h3 class="sub-header">Distribute UBI</h3>
         <div id="distribute-addresses">
           <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
         </div>
-        <a href="#" onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
-        <a href="#" onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
-      </div>
-    </div>
+        <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
+        <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a>
+        <span id="distribute-addresses-result"></span>
+      </div>-->
 
-    <div class="row">
-      <div style="margin-bottom: 100px;">
-      </div>
     </div>
 
   </body>
