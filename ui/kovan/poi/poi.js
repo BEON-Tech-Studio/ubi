@@ -13,9 +13,13 @@ var contractAddressPoIPoolUBI = '0x0E24f28e416e1bc0dAFad990e276E48ec5Fc130c';
 var contractPoolUBI = new web3.eth.Contract(abiPoIPoolUBI, contractAddressPoIPoolUBI);
 
 /** PoI Pool ERC20 Contract **/
-var abiPoIPoolERC20 = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"EtherReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferERC20Sent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferEtherSent","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[],"name":"DAI","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WETH9","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_DAI","type":"address"}],"name":"changeDAITokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"}],"name":"changeISwapRouter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_WETH9","type":"address"}],"name":"changeWETH9TokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"}],"name":"getERC20Balance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getEtherBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"governor","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"},{"internalType":"address","name":"_DAI","type":"address"},{"internalType":"address","name":"_WETH9","type":"address"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapRouter","outputs":[{"internalType":"contract ISwapRouter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForDAI","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForETH","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
+//var abiPoIPoolERC20 = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"EtherReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferERC20Sent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferEtherSent","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[],"name":"DAI","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WETH9","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_DAI","type":"address"}],"name":"changeDAITokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"}],"name":"changeISwapRouter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_WETH9","type":"address"}],"name":"changeWETH9TokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"}],"name":"getERC20Balance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getEtherBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"governor","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"},{"internalType":"address","name":"_DAI","type":"address"},{"internalType":"address","name":"_WETH9","type":"address"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapRouter","outputs":[{"internalType":"contract ISwapRouter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForDAI","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForETH","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
+var abiPoIPoolERC20 = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"EtherReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferERC20Sent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferEtherSent","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[],"name":"DAI","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WETH9","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_DAI","type":"address"}],"name":"changeDAITokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"}],"name":"changeISwapRouter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_WETH9","type":"address"}],"name":"changeWETH9TokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"}],"name":"getERC20Balance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getEtherBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"governor","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract ISwapRouter","name":"_swapRouter","type":"address"},{"internalType":"address","name":"_DAI","type":"address"},{"internalType":"address","name":"_WETH9","type":"address"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapRouter","outputs":[{"internalType":"contract ISwapRouter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForDAI","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenIn","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint24","name":"_poolFee","type":"uint24"},{"internalType":"uint256","name":"_deadline","type":"uint256"}],"name":"swapTokenForETH","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transferEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20Upgradeable","name":"_token","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawEther","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
 var contractAddressPoIPoolERC20 = '0x6E5D79A53e97c649dbFEe21F4370b2bCe605701e';
 var contractPoolERC20 = new web3.eth.Contract(abiPoIPoolERC20, contractAddressPoIPoolERC20);
+
+/** Generic ERC20 Abi **/
+var abiERC20 = JSON.parse('[{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"type":"function"},{"inputs":[{"internalType":"address","name":"_recipient","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]');
 
 var loginButton, userWallet, account;
 window.userWalletAddress = null;
@@ -66,7 +70,25 @@ function fillContractsAddresses() {
   document.getElementById('address-stream-balance').value = contractAddressPoIPoolUBI;
 }
 
+function hideAllSections() {
+  var sections = document.getElementsByClassName('functions-section');
+  for(var i = 0; i < sections.length; i++) {
+      sections[i].style.display = 'none';
+  }
+}
+
+function showSection(id) {
+  hideAllSections();
+  document.getElementById(id).style.display = 'block';
+  var buttons = document.getElementsByClassName('btn-default');
+  for(var i = 0; i < buttons.length; i++) {
+      buttons[i].removeAttribute('disabled');
+  }
+  document.getElementById(id + '-button').setAttribute('disabled', true);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  hideAllSections();
   fillContractsAddresses();
   loginButton = document.getElementById('loginButton');
   userWallet = document.getElementById('userWallet');
@@ -88,19 +110,6 @@ function toShortAmount(amount) {
 
 function formatBalanceAmount(amount) {
   return (amount / Math.pow(10, 18)).toFixed(3) + " UBI";
-}
-
-async function sendTransaction(transaction, elementId) {
-  try {
-    const txHash = await window.ethereum.request({method: 'eth_sendTransaction', params: [transaction]});
-    document.getElementById(elementId).textContent = 'Check out your transaction on Etherscan: ';
-    document.getElementById(elementId + '-link').href = 'https://kovan.etherscan.io/tx/' + txHash;
-    document.getElementById(elementId + '-link').textContent = 'https://kovan.etherscan.io/tx/' + txHash;
-  } catch(error) {
-    document.getElementById(elementId).textContent = 'Something went wrong: ' + error.message;
-    document.getElementById(elementId + '-link').href = '';
-    document.getElementById(elementId + '-link').textContent = '';
-  }
 }
 
 function setStreamWeeks(weeks) {
@@ -125,6 +134,34 @@ function setStreamMinutes(minutes) {
 
 function setStreamPercentage(value) {
   document.getElementById('amount-stream').value = value / 100 * 280000000000000;
+}
+
+async function sendTransaction(transaction, elementId) {
+  try {
+    const txHash = await window.ethereum.request({method: 'eth_sendTransaction', params: [transaction]});
+    document.getElementById(elementId).textContent = 'Check out your transaction on Etherscan: ';
+    document.getElementById(elementId + '-link').href = 'https://kovan.etherscan.io/tx/' + txHash;
+    document.getElementById(elementId + '-link').textContent = 'https://kovan.etherscan.io/tx/' + txHash;
+  } catch(error) {
+    document.getElementById(elementId).textContent = 'Something went wrong: ' + error.message;
+    document.getElementById(elementId + '-link').href = '';
+    document.getElementById(elementId + '-link').textContent = '';
+  }
+}
+
+function getTokenSymbol(fieldName) {
+  var tokenAddress = document.getElementById(fieldName).value;
+  if(tokenAddress.length != 42) {
+    return;
+  }
+  var erc20Contract = new web3.eth.Contract(abiERC20, tokenAddress);
+  try {
+    erc20Contract.methods.symbol().call().then(function(result) {
+      document.getElementById(fieldName + '-symbol').textContent = "(" + result + ")";
+    });
+  } catch(error) {
+    // do nothing
+  }
 }
 
 /** Smart Contract Functions **/
@@ -247,4 +284,78 @@ function distributeUBI() {
   sendTransaction(transaction, 'distribute-addresses-result');
 }
 
+/** ERC20 Contracts Functions **/
+
+function donateEther() {
+  var amount = document.getElementById('donate-eth-amount').value;
+  amountToSend = web3.utils.toWei(amount, "ether");
+  amountToSend = web3.utils.toHex(amountToSend);
+
+  const transaction = {
+    from: account,
+    to: contractAddressPoIPoolERC20,
+    value: amountToSend,
+    gas: web3.utils.toHex(21000 * 200)
+  };
+
+  sendTransaction(transaction, 'donate-eth-result');
+}
+
+function donateERC20() {
+  var tokenAddress = document.getElementById('donate-erc20-token').value;
+  var amount = document.getElementById('donate-erc20-amount').value;
+  amountToSend = toLargeAmount(amount);
+  var erc20Contract = new web3.eth.Contract(abiERC20, tokenAddress);
+
+  const transaction = {
+    from: account,
+    to: tokenAddress,
+    data: erc20Contract.methods.transfer(contractAddressPoIPoolERC20, amountToSend).encodeABI(),
+    gas: web3.utils.toHex(21000 * 200)
+  };
+
+  sendTransaction(transaction, 'donate-erc20-result');
+}
+
 /** PoI Pool ERC20 Contract Functions **/
+
+function getPoolBalanceEther() {
+  contractPoolERC20.methods.getEtherBalance().call().then(function(result) {
+    console.log(result);
+    document.getElementById('balance-eth-pool').textContent = toShortAmount(result);
+  });
+}
+
+function getPoolBalanceERC20() {
+  var tokenAddress = document.getElementById('address-erc20-pool-balance').value;
+  contractPoolERC20.methods.getERC20Balance(tokenAddress).call().then(function(result) {
+    console.log(result);
+    document.getElementById('balance-erc20-pool').textContent = toShortAmount(result);
+  });
+}
+
+function withdrawEther() {
+  var amount = document.getElementById('withdraw-eth-amount').value;
+  amountToWithdraw = toLargeAmount(amount);
+
+  const transaction = {
+    from: account,
+    to: contractAddressPoIPoolERC20,
+    data: contractPoolERC20.methods.withdrawEther(amountToWithdraw).encodeABI(),
+    gas: web3.utils.toHex(21000 * 200)
+  };
+
+  sendTransaction(transaction, 'withdraw-eth-result');
+}
+
+function withdrawERC20() {
+  // TODO
+}
+
+function transferEther() {
+  // TODO
+}
+
+function transferERC20() {
+  // TODO
+}

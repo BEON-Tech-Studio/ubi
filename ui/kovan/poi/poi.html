@@ -33,82 +33,163 @@
         <span id="userWallet"></span>
       </div>
 
-      <h2 class="page-header">UBI Contract</h2>
-
       <div class="row">
-        <h3 class="sub-header">Get Your Balance</h3>
-        <label for="balance-user">Balance:</label>
-        <div id="balance-user"></div>
-        <a onclick="getUserBalance()" class="btn btn-primary">Go!</a>
+        <a onclick="showSection('ubi')" id="ubi-button" class="btn btn-default btn-disabled">UBI Contract</a>
+        <a onclick="showSection('poi-pool-ubi')" id="poi-pool-ubi-button" class="btn btn-default">PoI Pool UBI Contract</a>
+        <a onclick="showSection('erc20')" id="erc20-button" class="btn btn-default">ERC20 Contracts</a>
+        <a onclick="showSection('poi-pool-erc20')" id="poi-pool-erc20-button" class="btn btn-default">PoI Pool ERC20 Contract</a>
       </div>
 
-      <div class="row">
-        <h3 class="sub-header">Get Pool Balance</h3>
-        <label for="balance-pool">Balance:</label>
-        <div id="balance-pool"></div>
-        <a onclick="getPoolBalance()" class="btn btn-primary">Go!</a>
-      </div>
+      <div class="functions-section" id="ubi">
 
-      <div class="row">
-        <h3 class="sub-header">Start Accruing UBI</h3>
-        <a onclick="startAccruing()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="accruing-result"></span><a href="#" id="accruing-result-link" target="_blank"></a>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Create Stream For Pool</h3>
-        <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
-        <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
-        <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
-        <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
-        <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
-        <input type="text" id="amount-stream"/><span>&nbsp;Amount per second (add all decimals)</span><br/><br/>
-        <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
-        <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
-        <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
-        <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Get Balance By Stream ID</h3>
-        <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
-        <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
-        <label for="balance-stream">Balance:</label>
-        <div id="balance-stream"></div>
-        <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
-      </div>
-
-      <h2 class="page-header">PoI Pool UBI Contract</h2>
-
-      <div class="row">
-        <h3 class="sub-header">Set Max UBI Per Recipient</h3>
-        <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
-        <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="set-max-ubi-result"></span><a href="#" id="set-max-ubi-result-link" target="_blank"></a>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Get Max UBI Per Recipient</h3>
-        <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="max-ubi-result"></span>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Claim UBI From Streams</h3>
-        <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
-        <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
-        <span id="claim-stream-id-result"></span><a href="#" id="claim-stream-id-result-link" target="_blank"></a>
-      </div>
-
-      <div class="row">
-        <h3 class="sub-header">Distribute UBI</h3>
-        <div id="distribute-addresses">
-          <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
+        <div class="row">
+          <h3 class="sub-header">Get Your Balance</h3>
+          <label for="balance-user">Balance:</label>
+          <div id="balance-user"></div>
+          <a onclick="getUserBalance()" class="btn btn-primary">Go!</a>
         </div>
-        <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
-        <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a><br/><br/>
-        <span id="distribute-addresses-result"></span><a href="#" id="distribute-addresses-result-link" target="_blank"></a>
+
+        <div class="row">
+          <h3 class="sub-header">Get Pool Balance</h3>
+          <label for="balance-pool">Balance:</label>
+          <div id="balance-pool"></div>
+          <a onclick="getPoolBalance()" class="btn btn-primary">Go!</a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Start Accruing UBI</h3>
+          <a onclick="startAccruing()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="accruing-result"></span><a href="#" id="accruing-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Create Stream For Pool</h3>
+          <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
+          <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
+          <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
+          <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
+          <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
+          <input type="text" id="amount-stream"/><span>&nbsp;Amount per second (add all decimals)</span><br/><br/>
+          <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
+          <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
+          <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
+          <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Get Balance By Stream ID</h3>
+          <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+          <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
+          <label for="balance-stream">Balance:</label>
+          <div id="balance-stream"></div>
+          <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
+        </div>
+
+      </div>
+
+      <div class="functions-section" id="poi-pool-ubi">
+
+        <div class="row">
+          <h3 class="sub-header">Set Max UBI Per Recipient</h3>
+          <input type="text" id="max-ubi"/><span>&nbsp;Max UBI</span><br/><br/>
+          <a onclick="setMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="set-max-ubi-result"></span><a href="#" id="set-max-ubi-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Get Max UBI Per Recipient</h3>
+          <a onclick="getMaxUBIPerRecipient()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="max-ubi-result"></span>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Claim UBI From Streams</h3>
+          <input type="text" id="claim-stream-ids"/><span>&nbsp;Stream IDs (comma separated)</span><br/><br/>
+          <a onclick="claimFromStreams()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="claim-stream-id-result"></span><a href="#" id="claim-stream-id-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Distribute UBI</h3>
+          <div id="distribute-addresses">
+            <input type="text" class="distribute-address" placeholder="Address"/><br/><br/>
+          </div>
+          <a onclick="addInputForAddress()" class="btn btn-primary"> + </a><br/><br/>
+          <a onclick="distributeUBI()" class="btn btn-primary">Distribute</a><br/><br/>
+          <span id="distribute-addresses-result"></span><a href="#" id="distribute-addresses-result-link" target="_blank"></a>
+        </div>
+
+      </div>
+
+      <div class="functions-section" id="erc20">
+
+        <div class="row">
+          <h3 class="sub-header">Donate Ether to Pool</h3>
+          <input type="text" id="donate-eth-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="donateEther()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="donate-eth-result"></span><a href="#" id="donate-eth-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Donate ERC20 Token to Pool</h3>
+          <input type="text" onchange="getTokenSymbol('donate-erc20-token')" id="donate-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="donate-erc20-token-symbol"></span><br/><br/>
+          <input type="text" id="donate-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="donateERC20()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="donate-erc20-result"></span><a href="#" id="donate-erc20-result-link" target="_blank"></a>
+        </div>
+
+      </div>
+
+      <div class="functions-section" id="poi-pool-erc20">
+
+        <div class="row">
+          <h3 class="sub-header">Get Pool Balance Ether</h3>
+          <label for="balance-eth-pool">Balance:</label>
+          <div id="balance-eth-pool"></div>
+          <a onclick="getPoolBalanceEther()" class="btn btn-primary">Go!</a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Get Pool Balance ERC20 Token</h3>
+          <input type="text" onchange="getTokenSymbol('address-erc20-pool-balance')" id="address-erc20-pool-balance"/><span>&nbsp;Token Address&nbsp;</span><span id="address-erc20-pool-balance-symbol"></span><br/><br/>
+          <label for="balance-erc20-pool">Balance:</label>
+          <div id="balance-erc20-pool"></div>
+          <a onclick="getPoolBalanceERC20()" class="btn btn-primary">Go!</a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Withdraw Ether from Pool</h3>
+          <input type="text" id="withdraw-eth-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="withdrawEther()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="withdraw-eth-result"></span><a href="#" id="withdraw-eth-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Withdraw ERC20 Token from Pool</h3>
+          <input type="text" onchange="getTokenSymbol('withdraw-erc20-token')" id="withdraw-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="withdraw-erc20-token-symbol"></span><br/><br/>
+          <input type="text" id="withdraw-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="withdrawERC20()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="withdraw-erc20-result"></span><a href="#" id="withdraw-erc20-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Make a Payment with Ether from Pool</h3>
+          <input type="text" id="transfer-eth-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+          <input type="text" id="transfer-eth-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="transferEther()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="transfer-eth-result"></span><a href="#" id="transfer-eth-result-link" target="_blank"></a>
+        </div>
+
+        <div class="row">
+          <h3 class="sub-header">Make a Payment with ERC20 Token from Pool (only owner)</h3>
+          <input type="text" onchange="getTokenSymbol('transfer-erc20-token')" id="transfer-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="transfer-erc20-token-symbol"></span><br/><br/>
+          <input type="text" id="transfer-erc20-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+          <input type="text" id="transfer-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
+          <a onclick="transferERC20()" class="btn btn-primary">Go!</a><br/><br/>
+          <span id="transfer-erc20-result"></span><a href="#" id="transfer-erc20-result-link" target="_blank"></a>
+        </div>
+
       </div>
 
     </div>
