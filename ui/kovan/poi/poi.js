@@ -77,6 +77,13 @@ function hideAllSections() {
   }
 }
 
+function disableCustomTokenFields() {
+  document.getElementById('donate-erc20-token').setAttribute('disabled', true);
+  document.getElementById('address-erc20-pool-balance').setAttribute('disabled', true);
+  document.getElementById('withdraw-erc20-token').setAttribute('disabled', true);
+  document.getElementById('transfer-erc20-token').setAttribute('disabled', true);
+}
+
 function showSection(id) {
   hideAllSections();
   document.getElementById(id).style.display = 'block';
@@ -90,6 +97,7 @@ function showSection(id) {
 window.addEventListener('DOMContentLoaded', () => {
   hideAllSections();
   fillContractsAddresses();
+  disableCustomTokenFields();
   loginButton = document.getElementById('loginButton');
   userWallet = document.getElementById('userWallet');
   loginButton.addEventListener('click', tryLoginWithMetaMask);
@@ -136,6 +144,20 @@ function setStreamPercentage(value) {
   document.getElementById('amount-stream').value = value / 100 * 280000000000000;
 }
 
+async function estimateGasAndSendTransaction(transaction, elementId) {
+  web3.eth.estimateGas(transaction, function(error, estimatedGas) {
+    if(error) {
+      if(confirm('The transaction will fail. Do you want to continue anyway?')) {
+        transaction.gas = web3.utils.toHex(21000 * 200);
+        sendTransaction(transaction, elementId);
+      }
+    } else {
+      transaction.gas = web3.utils.toHex(estimatedGas);
+      sendTransaction(transaction, elementId);
+    }
+  });
+}
+
 async function sendTransaction(transaction, elementId) {
   try {
     const txHash = await window.ethereum.request({method: 'eth_sendTransaction', params: [transaction]});
@@ -164,6 +186,28 @@ function getTokenSymbol(fieldName) {
   }
 }
 
+function selectTokenOnChange(field, customField) {
+  var select = document.getElementById(field);
+  var selectedValue = select.options[select.selectedIndex].value;
+  if(selectedValue == '0x0') {
+    document.getElementById(customField).removeAttribute('disabled');
+  } else {
+    document.getElementById(customField).setAttribute('disabled', true);
+  }
+}
+
+function getTokenAddress(selectField, customField) {
+  var select = document.getElementById(selectField);
+  var selectedValue = select.options[select.selectedIndex].value;
+  if(selectedValue == '0x0') {
+    return document.getElementById(customField).value;
+  }
+  if(selectedValue == 'null') {
+    return null;
+  }
+  return selectedValue;
+}
+
 /** Smart Contract Functions **/
 
 /** UBI Contract Functions **/
@@ -186,11 +230,10 @@ async function startAccruing() {
   const transaction = {
     from: account, 
     to: contractAddressUBI, 
-    data: contractUBI.methods.startAccruing(account).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractUBI.methods.startAccruing(account).encodeABI()
   };
 
-  sendTransaction(transaction, 'accruing-result');
+  estimateGasAndSendTransaction(transaction, 'accruing-result');
 }
 
 async function createStream() {
@@ -201,11 +244,10 @@ async function createStream() {
   const transaction = {
     from: account,
     to: contractAddressUBI,
-    data: contractUBI.methods.createStream(contractAddressPoIPoolUBI, amount, contractAddressUBI, start, stop).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractUBI.methods.createStream(contractAddressPoIPoolUBI, amount, contractAddressUBI, start, stop).encodeABI()
   };
 
-  sendTransaction(transaction, 'stream-result');
+  estimateGasAndSendTransaction(transaction, 'stream-result');
 }
 
 function getBalanceByStream() {
@@ -225,11 +267,10 @@ function setMaxUBIPerRecipient() {
   const transaction = {
     from: account, 
     to: contractAddressPoIPoolUBI, 
-    data: contractPoolUBI.methods.changeMaxUBIPerRecipient(amount).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractPoolUBI.methods.changeMaxUBIPerRecipient(amount).encodeABI()
   };
 
-  sendTransaction(transaction, 'set-max-ubi-result');
+  estimateGasAndSendTransaction(transaction, 'set-max-ubi-result');
 }
 
 function getMaxUBIPerRecipient() {
@@ -249,11 +290,10 @@ function claimFromStreams() {
   const transaction = {
     from: account, 
     to: contractAddressPoIPoolUBI, 
-    data: contractPoolUBI.methods.claimUBIFromStreams(streamIds).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractPoolUBI.methods.claimUBIFromStreams(streamIds).encodeABI()
   };
 
-  sendTransaction(transaction, 'claim-stream-id-result');
+  estimateGasAndSendTransaction(transaction, 'claim-stream-id-result');
 }
 
 function addInputForAddress() {
@@ -277,11 +317,10 @@ function distributeUBI() {
   const transaction = {
     from: account, 
     to: contractAddressPoIPoolUBI, 
-    data: contractPoolUBI.methods.distributeUBIToRecipients(filteredAddresses, filteredAddresses.length).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractPoolUBI.methods.distributeUBIToRecipients(filteredAddresses, filteredAddresses.length).encodeABI()
   };
 
-  sendTransaction(transaction, 'distribute-addresses-result');
+  estimateGasAndSendTransaction(transaction, 'distribute-addresses-result');
 }
 
 /** ERC20 Contracts Functions **/
@@ -294,15 +333,17 @@ function donateEther() {
   const transaction = {
     from: account,
     to: contractAddressPoIPoolERC20,
-    value: amountToSend,
-    gas: web3.utils.toHex(21000 * 200)
+    value: amountToSend
   };
 
-  sendTransaction(transaction, 'donate-eth-result');
+  estimateGasAndSendTransaction(transaction, 'donate-eth-result');
 }
 
 function donateERC20() {
-  var tokenAddress = document.getElementById('donate-erc20-token').value;
+  var tokenAddress = getTokenAddress('donate-erc20-token-select', 'donate-erc20-token');
+  if(!tokenAddress) {
+    return;
+  }
   var amount = document.getElementById('donate-erc20-amount').value;
   amountToSend = toLargeAmount(amount);
   var erc20Contract = new web3.eth.Contract(abiERC20, tokenAddress);
@@ -310,11 +351,10 @@ function donateERC20() {
   const transaction = {
     from: account,
     to: tokenAddress,
-    data: erc20Contract.methods.transfer(contractAddressPoIPoolERC20, amountToSend).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: erc20Contract.methods.transfer(contractAddressPoIPoolERC20, amountToSend).encodeABI()
   };
 
-  sendTransaction(transaction, 'donate-erc20-result');
+  estimateGasAndSendTransaction(transaction, 'donate-erc20-result');
 }
 
 /** PoI Pool ERC20 Contract Functions **/
@@ -327,7 +367,10 @@ function getPoolBalanceEther() {
 }
 
 function getPoolBalanceERC20() {
-  var tokenAddress = document.getElementById('address-erc20-pool-balance').value;
+  var tokenAddress = getTokenAddress('address-erc20-pool-balance-select', 'address-erc20-pool-balance');
+  if(!tokenAddress) {
+    return;
+  }
   contractPoolERC20.methods.getERC20Balance(tokenAddress).call().then(function(result) {
     console.log(result);
     document.getElementById('balance-erc20-pool').textContent = toShortAmount(result);
@@ -341,21 +384,57 @@ function withdrawEther() {
   const transaction = {
     from: account,
     to: contractAddressPoIPoolERC20,
-    data: contractPoolERC20.methods.withdrawEther(amountToWithdraw).encodeABI(),
-    gas: web3.utils.toHex(21000 * 200)
+    data: contractPoolERC20.methods.withdrawEther(amountToWithdraw).encodeABI()
   };
 
-  sendTransaction(transaction, 'withdraw-eth-result');
+  estimateGasAndSendTransaction(transaction, 'withdraw-eth-result');
 }
 
 function withdrawERC20() {
-  // TODO
+  var tokenAddress = getTokenAddress('withdraw-erc20-token-select', 'withdraw-erc20-token');
+  if(!tokenAddress) {
+    return;
+  }
+  var amount = document.getElementById('withdraw-erc20-amount').value;
+  amountToWithdraw = toLargeAmount(amount);
+
+  const transaction = {
+    from: account,
+    to: contractAddressPoIPoolERC20,
+    data: contractPoolERC20.methods.withdrawERC20(tokenAddress, amountToWithdraw).encodeABI()
+  };
+
+  estimateGasAndSendTransaction(transaction, 'withdraw-erc20-result');
 }
 
 function transferEther() {
-  // TODO
+  var recipientAddress = document.getElementById('transfer-eth-address').value;
+  var amount = document.getElementById('transfer-eth-amount').value;
+  amountToTransfer = toLargeAmount(amount);
+
+  const transaction = {
+    from: account,
+    to: contractAddressPoIPoolERC20,
+    data: contractPoolERC20.methods.transferEther(recipientAddress, amountToTransfer).encodeABI()
+  };
+
+  estimateGasAndSendTransaction(transaction, 'transfer-eth-result');
 }
 
 function transferERC20() {
-  // TODO
+  var tokenAddress = getTokenAddress('transfer-erc20-token-select', 'transfer-erc20-token');
+  if(!tokenAddress) {
+    return;
+  }
+  var recipientAddress = document.getElementById('transfer-erc20-address').value;
+  var amount = document.getElementById('transfer-erc20-amount').value;
+  amountToTransfer = toLargeAmount(amount);
+
+  const transaction = {
+    from: account,
+    to: contractAddressPoIPoolERC20,
+    data: contractPoolERC20.methods.transferERC20(tokenAddress, recipientAddress, amountToTransfer).encodeABI()
+  };
+
+  estimateGasAndSendTransaction(transaction, 'transfer-erc20-result');
 }

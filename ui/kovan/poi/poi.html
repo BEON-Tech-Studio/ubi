@@ -133,6 +133,13 @@
 
         <div class="row">
           <h3 class="sub-header">Donate ERC20 Token to Pool</h3>
+          <select id="donate-erc20-token-select" onchange="selectTokenOnChange('donate-erc20-token-select', 'donate-erc20-token')">
+            <option value="null"> -- Select Token -- </option>
+            <option value="0xc2569dd7d0fd715b054fbf16e75b001e5c0c1115">USDC</option>
+            <option value="0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa">DAI</option>
+            <option value="0xa36085F69e2889c224210F603D836748e7dC0088">LINK</option>
+            <option value="0x0">Custom</option>
+          </select><br/><br/>
           <input type="text" onchange="getTokenSymbol('donate-erc20-token')" id="donate-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="donate-erc20-token-symbol"></span><br/><br/>
           <input type="text" id="donate-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
           <a onclick="donateERC20()" class="btn btn-primary">Go!</a><br/><br/>
@@ -152,6 +159,13 @@
 
         <div class="row">
           <h3 class="sub-header">Get Pool Balance ERC20 Token</h3>
+          <select id="address-erc20-pool-balance-select" onchange="selectTokenOnChange('address-erc20-pool-balance-select', 'address-erc20-pool-balance')">
+            <option value="null"> -- Select Token -- </option>
+            <option value="0xc2569dd7d0fd715b054fbf16e75b001e5c0c1115">USDC</option>
+            <option value="0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa">DAI</option>
+            <option value="0xa36085F69e2889c224210F603D836748e7dC0088">LINK</option>
+            <option value="0x0">Custom</option>
+          </select><br/><br/>
           <input type="text" onchange="getTokenSymbol('address-erc20-pool-balance')" id="address-erc20-pool-balance"/><span>&nbsp;Token Address&nbsp;</span><span id="address-erc20-pool-balance-symbol"></span><br/><br/>
           <label for="balance-erc20-pool">Balance:</label>
           <div id="balance-erc20-pool"></div>
@@ -167,6 +181,13 @@
 
         <div class="row">
           <h3 class="sub-header">Withdraw ERC20 Token from Pool</h3>
+          <select id="withdraw-erc20-token-select" onchange="selectTokenOnChange('withdraw-erc20-token-select', 'withdraw-erc20-token')">
+            <option value="null"> -- Select Token -- </option>
+            <option value="0xc2569dd7d0fd715b054fbf16e75b001e5c0c1115">USDC</option>
+            <option value="0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa">DAI</option>
+            <option value="0xa36085F69e2889c224210F603D836748e7dC0088">LINK</option>
+            <option value="0x0">Custom</option>
+          </select><br/><br/>
           <input type="text" onchange="getTokenSymbol('withdraw-erc20-token')" id="withdraw-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="withdraw-erc20-token-symbol"></span><br/><br/>
           <input type="text" id="withdraw-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
           <a onclick="withdrawERC20()" class="btn btn-primary">Go!</a><br/><br/>
@@ -175,16 +196,23 @@
 
         <div class="row">
           <h3 class="sub-header">Make a Payment with Ether from Pool</h3>
-          <input type="text" id="transfer-eth-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+          <input type="text" id="transfer-eth-address"/><span>&nbsp;Recipient Address</span><br/><br/>
           <input type="text" id="transfer-eth-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
           <a onclick="transferEther()" class="btn btn-primary">Go!</a><br/><br/>
           <span id="transfer-eth-result"></span><a href="#" id="transfer-eth-result-link" target="_blank"></a>
         </div>
 
         <div class="row">
-          <h3 class="sub-header">Make a Payment with ERC20 Token from Pool (only owner)</h3>
+          <h3 class="sub-header">Make a Payment with ERC20 Token from Pool</h3>
+          <select id="transfer-erc20-token-select" onchange="selectTokenOnChange('transfer-erc20-token-select', 'transfer-erc20-token')">
+            <option value="null"> -- Select Token -- </option>
+            <option value="0xc2569dd7d0fd715b054fbf16e75b001e5c0c1115">USDC</option>
+            <option value="0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa">DAI</option>
+            <option value="0xa36085F69e2889c224210F603D836748e7dC0088">LINK</option>
+            <option value="0x0">Custom</option>
+          </select><br/><br/>
           <input type="text" onchange="getTokenSymbol('transfer-erc20-token')" id="transfer-erc20-token"/><span>&nbsp;Token Address&nbsp;</span><span id="transfer-erc20-token-symbol"></span><br/><br/>
-          <input type="text" id="transfer-erc20-address"/><span>&nbsp;Receiver Address</span><br/><br/>
+          <input type="text" id="transfer-erc20-address"/><span>&nbsp;Recipient Address</span><br/><br/>
           <input type="text" id="transfer-erc20-amount"/><span>&nbsp;Amount (short format)</span><br/><br/>
           <a onclick="transferERC20()" class="btn btn-primary">Go!</a><br/><br/>
           <span id="transfer-erc20-result"></span><a href="#" id="transfer-erc20-result-link" target="_blank"></a>
