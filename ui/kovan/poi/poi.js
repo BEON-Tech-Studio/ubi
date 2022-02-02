@@ -211,14 +211,16 @@ function getTokenAddress(selectField, customField) {
 /** UBI Contract Functions **/
 
 function getUserBalance() {
-  contractUBI.methods.balanceOf(account).call().then(function(balance) {
+  const encodedFunction = web3.eth.abi.encodeFunctionSignature('balanceOf(address)');
+  contractUBI.methods[encodedFunction](account).call().then(function(balance) {
     console.log(balance);
     document.getElementById('balance-user').textContent = formatBalanceAmount(balance);
   });
 }
 
 function getPoolBalance() {
-  contractUBI.methods.balanceOf(contractAddressPoIPoolUBI).call().then(function(balance) {
+  const encodedFunction = web3.eth.abi.encodeFunctionSignature('balanceOf(address)');
+  contractUBI.methods[encodedFunction](contractAddressPoIPoolUBI).call().then(function(balance) {
     console.log(balance);
     document.getElementById('balance-pool').textContent = formatBalanceAmount(balance);
   });
@@ -248,9 +250,22 @@ async function createStream() {
   estimateGasAndSendTransaction(transaction, 'stream-result');
 }
 
+async function cancelStream() {
+  var streamId = document.getElementById('stream-id-cancel').value;
+
+  const transaction = {
+    from: account, 
+    to: contractAddressUBI, 
+    data: contractUBI.methods.cancelStream(streamId).encodeABI()
+  };
+
+  estimateGasAndSendTransaction(transaction, 'cancel-stream-result');
+}
+
 function getBalanceByStream() {
+  const encodedFunction = web3.eth.abi.encodeFunctionSignature('balanceOf(uint256)');
   var streamId = document.getElementById('stream-id').value;
-  contractUBI.methods.balanceOf(streamId).call().then(function(balance) {
+  contractUBI.methods[encodedFunction](streamId).call().then(function(balance) {
     console.log(balance);
     document.getElementById('balance-stream').textContent = formatBalanceAmount(balance);
   });
