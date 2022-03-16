@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <title>UBI v2 - PoI</title>
+ 
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
+    <script src="./config.js"></script>
+    <script src="./contracts.js"></script>
+    <script src="./script.js"></script>
+    <style type="text/css">
+      .row {
+        border: black 1px solid;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+      }
+      .container {
+        margin-bottom: 50px;
+      }
+    </style>
+  </head>
+ 
+  <body>
+
+    <div class="container">
+
+      <h1 class="page-header">UBI v2 ERC721 - Kovan</h1>
+      <h3>UBI Address: <span id="contract-address-ubi"></span></h3>
+      <h3>sUBI Address: <span id="contract-address-subi"></span></h3>
+
+      <div class="row">
+        <button id="loginButton" class="btn btn-primary">Connect</button><br/>
+        <span id="userWallet"></span>
+      </div>
+
+      <div class="row">
+        <a onclick="showSection('ubi')" id="ubi-button" class="btn btn-default btn-disabled">UBI Contract</a>
+        <a onclick="showSection('subi')" id="poi-pool-ubi-button" class="btn btn-default">sUBI Contract</a>
+      </div>
+
+      <div class="functions-section" id="ubi">
+
+        <div class="row">
+          <h3 class="sub-header">Get Balance</h3>
+          <div class="form-group">
+            <label for="balance">Balance:</label>
+            <div id="balance"></div>
+          </div>
+          <a onclick="getBalance()" class="btn btn-primary">Go!</a>
+        </div>
+  
+        <div class="row">
+          <h3 class="sub-header">Get Balance Of</h3>
+          <div class="form-group">
+            <input type="text" id="address-balance" placeholder="Address"/><br/><br/>
+            <label for="balance-address">Balance:</label>
+            <div id="balance-address"></div>
+          </div>
+          <a onclick="getBalanceOfAddress()" class="btn btn-primary">Go!</a>
+        </div>
+  
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Start Accruing UBI</h3>
+            <a onclick="accruing()" class="btn btn-primary">Go!</a><br/><br/>
+            <span id="accruing-result"></span><a href="#" id="accruing-result-link" target="_blank"></a>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Create Stream</h3>
+            <input type="text" id="address-stream"/><span>&nbsp;Destination Address</span><br/><br/>
+            <input type="text" id="start-stream"/><span>&nbsp;Start Timestamp</span><br/><br/>
+            <input type="text" id="stop-stream"/><span>&nbsp;Stop Timestamp</span><br/><br/>
+            <a onclick="setStreamHours(1)" class="btn btn-primary">1 Hour From Now</a>&nbsp;
+            <a onclick="setStreamDays(1)" class="btn btn-primary">1 Day From Now</a>&nbsp;
+            <a onclick="setStreamWeeks(1)" class="btn btn-primary">1 Week From Now</a><br/><br/>
+            <input type="text" id="quantity-stream"/><span>&nbsp;Quantity (add all decimals)</span><br/><br/>
+            <a onclick="setStreamPercentage(25)" class="btn btn-primary">25%</a>&nbsp;
+            <a onclick="setStreamPercentage(50)" class="btn btn-primary">50%</a>&nbsp;
+            <a onclick="setStreamPercentage(100)" class="btn btn-primary">100%</a><br/><br/>
+            <a onclick="createStream()" class="btn btn-primary">Go!</a><br/><br/>
+            <span id="stream-result"></span><a href="#" id="stream-result-link" target="_blank"></a>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Cancel Stream</h3>
+            <input type="text" id="stream-id-cancel"/><span>&nbsp;Stream ID</span><br/><br/>
+            <a onclick="cancelStream()" class="btn btn-primary">Go!</a><br/><br/>
+            <span id="cancel-stream-result"></span><a href="#" id="cancel-stream-result-link" target="_blank"></a>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Get Balance By Stream ID</h3>
+            <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+            <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
+            <div class="form-group">
+              <label for="balance-stream">Balance:</label>
+              <div id="balance-stream"></div>
+            </div>
+            <a onclick="getBalanceByStream()" class="btn btn-primary">Go!</a>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Withdraw From Stream</h3>
+            <input type="text" id="withdraw-stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+            <a onclick="withdrawFromStream()" class="btn btn-primary">Go!</a><br/><br/>
+            <span id="withdraw-result"></span><a href="#" id="withdraw-result-link" target="_blank"></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="functions-section" id="subi">
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

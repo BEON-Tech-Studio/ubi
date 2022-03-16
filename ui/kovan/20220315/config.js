@@ -1,0 +1,1 @@
+var infuraAPIKey = '9ecdcc8cfd4e4f299867b193230ffea6';

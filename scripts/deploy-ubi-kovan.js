@@ -11,11 +11,11 @@ async function main() {
   
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("UBI");
+  const UBI = await ethers.getContractFactory("UBI");
   console.log("Deploying UBI Coin...");
 
-  const token = await upgrades.deployProxy(
-    Token,
+  const ubi = await upgrades.deployProxy(
+    UBI,
     [
       deploymentParams.INITIAL_SUPPLY,
       deploymentParams.TOKEN_NAME,
@@ -29,7 +29,14 @@ async function main() {
     }
   );
 
-  console.log("Token deployed to:", token.address);  
+  console.log("UBI deployed to:", ubi.address);
+
+  const SUBI = await ethers.getContractFactory("sUBI");
+  console.log("Deploying sUBI...");
+
+  const subi = await SUBI.deploy(ubi.address, deployer.address, 100, "Streamed Universal Basic Income", "SUBI");
+
+  console.log("Token deployed to:", subi.address);
 }
 
 main()
