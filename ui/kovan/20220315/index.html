@@ -35,7 +35,7 @@
 
       <div class="row">
         <a onclick="showSection('ubi')" id="ubi-button" class="btn btn-default btn-disabled">UBI Contract</a>
-        <a onclick="showSection('subi')" id="poi-pool-ubi-button" class="btn btn-default">sUBI Contract</a>
+        <a onclick="showSection('subi')" id="subi-button" class="btn btn-default">sUBI Contract</a>
       </div>
 
       <div class="functions-section" id="ubi">
@@ -98,7 +98,6 @@
           <div>
             <h3 class="sub-header">Get Balance By Stream ID</h3>
             <input type="text" id="stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
-            <input type="text" id="address-stream-balance"/><span>&nbsp;Address</span><br/><br/>
             <div class="form-group">
               <label for="balance-stream">Balance:</label>
               <div id="balance-stream"></div>
@@ -119,6 +118,16 @@
       </div>
 
       <div class="functions-section" id="subi">
+
+        <div class="row">
+          <div>
+            <h3 class="sub-header">Transfer Stream</h3>
+            <input type="text" id="transfer-stream-id"/><span>&nbsp;Stream ID</span><br/><br/>
+            <input type="text" id="transfer-stream-address"/><span>&nbsp;Destination Address</span><br/><br/>
+            <a onclick="transferStream()" class="btn btn-primary">Go!</a><br/><br/>
+            <span id="transfer-stream-result"></span><a href="#" id="transfer-stream-result-link" target="_blank"></a>
+          </div>
+        </div>
 
       </div>
 

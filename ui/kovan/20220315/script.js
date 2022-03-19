@@ -51,7 +51,7 @@ function fillContractsAddresses() {
 function hideAllSections() {
   var sections = document.getElementsByClassName('functions-section');
   for(var i = 0; i < sections.length; i++) {
-      sections[i].style.display = 'none';
+    sections[i].style.display = 'none';
   }
 }
 
@@ -60,7 +60,7 @@ function showSection(id) {
   document.getElementById(id).style.display = 'block';
   var buttons = document.getElementsByClassName('btn-default');
   for(var i = 0; i < buttons.length; i++) {
-      buttons[i].removeAttribute('disabled');
+    buttons[i].removeAttribute('disabled');
   }
   document.getElementById(id + '-button').setAttribute('disabled', true);
 }
@@ -140,7 +140,7 @@ async function createStream() {
   const transaction = {
     from: account, 
     to: contractUBIAddress, 
-    data: contract.methods.createStream(address, quantity, contractAddress, start, stop).encodeABI()
+    data: contractUBI.methods.createStream(address, quantity, start, stop).encodeABI()
   };
 
   estimateGasAndSendTransaction(transaction, 'stream-result');
@@ -151,8 +151,8 @@ async function cancelStream() {
 
   const transaction = {
     from: account, 
-    to: contractAddress, 
-    data: contract.methods.cancelStream(streamId).encodeABI()
+    to: contractUBIAddress, 
+    data: contractUBI.methods.cancelStream(streamId).encodeABI()
   };
 
   estimateGasAndSendTransaction(transaction, 'cancel-stream-result');
@@ -160,8 +160,7 @@ async function cancelStream() {
 
 function getBalanceByStream() {
   var streamId = document.getElementById('stream-id').value;
-  var address = document.getElementById('address-stream-balance').value;
-  contract.methods.balanceOf(streamId, address).call().then(function(balance) {
+  contractSUBI.methods.balanceOfStream(streamId).call().then(function(balance) {
     console.log(balance);
     document.getElementById('balance-stream').textContent = formatBalanceAmount(balance);
   });
@@ -172,11 +171,24 @@ async function withdrawFromStream() {
 
   const transaction = {
     from: account, 
-    to: contractAddress, 
-    data: contract.methods.withdrawFromStream(streamId).encodeABI()
+    to: contractUBIAddress, 
+    data: contractUBI.methods.withdrawFromStream(streamId).encodeABI()
   };
 
   estimateGasAndSendTransaction(transaction, 'withdraw-result');
+}
+
+async function transferStream() {
+  var streamId = document.getElementById('transfer-stream-id').value;
+  var address = document.getElementById('transfer-stream-address').value;
+
+  const transaction = {
+    from: account, 
+    to: contractSUBIAddress, 
+    data: contractSUBI.methods.transferFrom(account, address, streamId).encodeABI()
+  };
+
+  estimateGasAndSendTransaction(transaction, 'transfer-stream-result');
 }
 
 async function estimateGasAndSendTransaction(transaction, elementId) {
