@@ -7,6 +7,7 @@ const { network, upgrades } = require("hardhat");
 
 let accounts;
 let delegateToPool;
+const ONE_YEAR = 31536000;
 
 /**
  @summary Tests for UBI.sol
@@ -78,10 +79,27 @@ contract('DelegateUBIToPool.sol', accounts => {
     describe('UBI Coin and Proof of Humanity', ubiCoinTests);
 
     describe('#delegateToPool', () => {
+        it("happy path - Emits IncomeDelegated event", async () => {
+            const recipient = addresses[1];
+            const percentage = 50;
+
+            await setSubmissionIsRegistered(addresses[0], true);
+
+            const tx = await deletageUBI.delegateToPool(recipient, percentage)
+            const { events } = await tx.wait();
+            expect(events.find(({ event }) => event == 'IncomeDelegated')).not.to.be.empty;
+        });
+
         it("require fail - Percentage is zero", async () => {
             await setSubmissionIsRegistered(addresses[0], true);
             await expect(deletageUBI.delegateToPool(addresses[1], 0))
-                .to.be.revertedWith("Percentage is zero");
+                .to.be.revertedWith("Percentage out of bounds");
+        });
+
+        it("require fail - Percentage is greater than 100", async () => {
+            await setSubmissionIsRegistered(addresses[0], true);
+            await expect(deletageUBI.delegateToPool(addresses[1], 111))
+                .to.be.revertedWith("Percentage out of bounds");
         });
     });
 });
